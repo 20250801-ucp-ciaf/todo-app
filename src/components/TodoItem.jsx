@@ -1,4 +1,5 @@
 import React from "react";
+import TodoButton from './ui/TodoButton'
 
 export const TodoItem = ({ todo, onToggle, onDelete }) => {
   return (
@@ -11,19 +12,17 @@ export const TodoItem = ({ todo, onToggle, onDelete }) => {
           className="w-5 h-5"
         />
         <span
-          className={
-            todo.completed ? "line-through text-gray-500" : "text-gray-800"
-          }
+          className={todo.completed ? 'line-through text-gray-500' : 'text-gray-800'}
         >
           {todo.text}
         </span>
       </div>
-      <button
+      <TodoButton
         onClick={() => onDelete(todo.id)}
-        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 ml-2"
+        variant="small"
       >
         Eliminar
-      </button>
+      </TodoButton>
     </div>
   );
 };

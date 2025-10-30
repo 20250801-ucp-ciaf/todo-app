@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
+import TodoCounter from './components/TodoCounter'
 import useTodos from './hooks/useTodos'
 
 function App() {
@@ -27,11 +28,7 @@ function App() {
         onSubmit={handleAddTodo}
       />
 
-      <div className="mb-4">
-        <p className="text-gray-600">
-          Tareas pendientes: <span className="font-bold">{pendingCount}</span>
-        </p>
-      </div>
+      <TodoCounter count={pendingCount} />
 
       <TodoList
         todos={todos}

@@ -1,23 +1,20 @@
 import React from "react";
+import TodoInput from './ui/TodoInput'
+import TodoButton from './ui/TodoButton'
 
 export const TodoForm = ({ inputValue, onInputChange, onSubmit }) => {
   return (
     <form onSubmit={onSubmit} className="mb-6">
       <div className="flex gap-2">
-        <input
-          type="text"
+        <TodoInput
           value={inputValue}
           onChange={onInputChange}
           placeholder="Escribe una tarea..."
-          className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
         />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
+        <TodoButton type="submit" variant="primary">
           Agregar
-        </button>
+        </TodoButton>
       </div>
     </form>
-  );
+  )
 };
