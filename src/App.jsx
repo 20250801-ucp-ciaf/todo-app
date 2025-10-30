@@ -1,38 +1,19 @@
-import { useState } from "react";
-import StorageForm from "./components/TodoForm";
-import TodoList from "./components/TodoList";
+import { useState } from 'react'
+import TodoForm from './components/TodoForm'
+import TodoList from './components/TodoList'
+import useTodos from './hooks/useTodos'
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState('')
+  const { todos, addTodo, toggleTodo, deleteTodo, getPendingCount } = useTodos()
 
   const handleAddTodo = (e) => {
-    e.preventDefault();
-    if (inputValue.trim() === "") return;
+    e.preventDefault()
+    addTodo(inputValue)
+    setInputValue('')
+  }
 
-    const newTodo = {
-      id: Date.now(),
-      text: inputValue,
-      completed: false,
-    };
-
-    setTodos([...todos, newTodo]);
-    setInputValue("");
-  };
-
-  const handleToggleTodo = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
-  const handleDeleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  const pendingCount = todos.filter((todo) => !todo.completed).length;
+  const pendingCount = getPendingCount()
 
   return (
     <div className="container mx-auto p-4 max-w-md">
@@ -54,11 +35,11 @@ function App() {
 
       <TodoList
         todos={todos}
-        onToggle={handleToggleTodo}
-        onDelete={handleDeleteTodo}
+        onToggle={toggleTodo}
+        onDelete={deleteTodo}
       />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
