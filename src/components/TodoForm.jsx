@@ -1,6 +1,6 @@
 import React from "react";
-import TodoInput from './ui/TodoInput'
-import TodoButton from './ui/TodoButton'
+import { TodoInput } from "./ui/TodoInput";
+import { TodoButton } from "./ui/TodoButton";
 
 export const TodoForm = ({ inputValue, onInputChange, onSubmit }) => {
   return (
@@ -16,5 +16,5 @@ export const TodoForm = ({ inputValue, onInputChange, onSubmit }) => {
         </TodoButton>
       </div>
     </form>
-  )
+  );
 };

@@ -23,3 +23,5 @@ export const TodoButton = ({
     </button>
   );
 };
+
+export default TodoButton;
