@@ -1,4 +1,6 @@
 import { useState } from "react";
+import StorageForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -38,23 +40,11 @@ function App() {
         Mi Lista de Tareas
       </h1>
 
-      <form onSubmit={handleAddTodo} className="mb-6">
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Escribe una tarea..."
-            className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
-            Agregar
-          </button>
-        </div>
-      </form>
+      <TodoForm
+        inputValue={inputValue}
+        onInputChange={(e) => setInputValue(e.target.value)}
+        onSubmit={handleAddTodo}
+      />
 
       <div className="mb-4">
         <p className="text-gray-600">
@@ -62,44 +52,11 @@ function App() {
         </p>
       </div>
 
-      <div className="space-y-2">
-        {todos.length === 0 ? (
-          <p className="text-center text-gray-400 p-4">
-            No hay tareas. Agrega una para comenzar.
-          </p>
-        ) : (
-          todos.map((todo) => (
-            <div
-              key={todo.id}
-              className="flex items-center justify-between p-3 bg-gray-100 rounded border"
-            >
-              <div className="flex items-center gap-3 flex-1">
-                <input
-                  type="checkbox"
-                  checked={todo.completed}
-                  onChange={() => handleToggleTodo(todo.id)}
-                  className="w-5 h-5"
-                />
-                <span
-                  className={
-                    todo.completed
-                      ? "line-through text-gray-500"
-                      : "text-gray-800"
-                  }
-                >
-                  {todo.text}
-                </span>
-              </div>
-              <button
-                onClick={() => handleDeleteTodo(todo.id)}
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 ml-2"
-              >
-                Eliminar
-              </button>
-            </div>
-          ))
-        )}
-      </div>
+      <TodoList
+        todos={todos}
+        onToggle={handleToggleTodo}
+        onDelete={handleDeleteTodo}
+      />
     </div>
   );
 }
